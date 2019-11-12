@@ -1,0 +1,50 @@
+- name: Num 4 - Linux OSQuery
+  hosts: linux
+
+  tasks:
+  ### Part A Tasks  ###
+  - name: a-i OSQuery hostname
+    command: osqueryi "SELECT hostname FROM system_info" --line
+    register: hostname_out
+
+  - name: a-ii OSQuery OS and Patch level
+    command: osqueryi "SELECT name,version FROM os_version" --line
+    register: os_out
+
+  - name: a-iii IP Information
+    commad: osqueryi "SELECT interface,address,mask FROM interface_addresses" --line
+    register: ip_out
+
+  - name: a-iv List local users
+    command: osqueryi "SELECT username FROM users" --line
+    register: users_out
+
+  - debug: var=hostname_out.stdout
+  - debug: var=os_out.stdout
+  - debug: var=ip_out.stdout
+  - debug: var=users_out.stdout
+
+### Part B Tasks   ###
+
+  - name: b-ii
+    command: osqueryi "select * from etc_services" --line
+    register: installed_out
+
+  - debug: var=installed_out.stdout
+
+### Part C Tasks   ###
+  - name: c-i Recent Users
+    command: osqueryi "SELECT * FROM logged_in_users" --line
+    register: logged_in_out
+
+  - name: c-ii Running Processes
+    command: osqueryi "SELECT pid,name,uid,parent,path FROM processes;" --line
+    register: processes_out
+  
+  - name: c-iii Suspicious Outbound Connections
+    command: osqueryi "SELECT pid,port,protocol,address FROM listening_ports where port!=0 and port>1500" --line
+    register: sus_out
+
+  - debug: var=logged_in_out.stdout
+  - debug: var=processes_out.stdout
+  - debug: var=sus_out.stdout

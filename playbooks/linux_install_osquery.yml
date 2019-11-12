@@ -1,0 +1,7 @@
+- name: Install OSQuery on Linux Machines
+  hosts: linux
+
+  tasks:
+    - name: Run Install Script
+      script: /scripts/install_os.sh
+      become: true
