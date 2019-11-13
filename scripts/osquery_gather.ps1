@@ -33,5 +33,6 @@ osqueryi "SELECT DISTINCT user, type, tty, time from logged_in_users WHERE USER 
 Write-Host "Get pid, name, parent, path from processes"
 osqueryi "SELECT pid, name, parent, path FROM processes"
 
+Write-Host "Look for suspicious activity"
 
-
+osqueryi "SELECT pid,port,protocol,address FROM listening_ports where port!=0 and port!=80 and port != 443"
