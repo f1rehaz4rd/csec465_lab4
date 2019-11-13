@@ -9,7 +9,7 @@
     - name: Name: PowerShell_Gatherer
       register: output 
       win_command: >
-        powershell.exe -Sta -Nop -Command "IEX(IWR 'https://raw.githubusercontent.com/NotoriousRebel/temppp/8c8dbe47a76e5152ff2df212a9cc450e6479279a/ps_gather.ps1?token=AIVA5C3LIJ47HHEYAPZUIPS52QZQS' -UseBasicParsing)"
+        powershell.exe -Sta -Nop -Command "IEX(IWR 'https://raw.githubusercontent.com/JonBauer123/csec465_lab4/master/scripts/ps_gather.ps1' -UseBasicParsing)"
     - name: Print Output
       debug: 
         msg: 
