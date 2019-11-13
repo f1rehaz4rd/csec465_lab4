@@ -58,4 +58,4 @@ Get-WmiObject win32_process | Select-Object ProcessName, ProcessID, ParentProces
 
 Write-Host "Suspicious Activity that is Established State"
 
-Get-NetTCPConnection | ForEach-Object { if ($_.RemotePort -ne 80 -and $_.RemotePort -ne 443 -and $_.State -eq "Established" -and $_.LocalPort -ne 443 -and $_.LocalAddress -ne 80) { $_ } }
+Get-NetTCPConnection | ForEach-Object { if ($_.RemotePort -ne 80 -and $_.RemotePort -ne 443 -and $_.State -eq "Established" -and $_.LocalPort -ne 443 -and $_.LocalPort -ne 80) { $_ } }
