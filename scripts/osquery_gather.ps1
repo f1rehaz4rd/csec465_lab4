@@ -21,6 +21,7 @@ osqueryi "SELECT username, type from users"
 
 Write-Host "Part B: "
 
+osqueryi "SELECT name,version from programs" --line
 
 Write-Host "Part C: "
 
