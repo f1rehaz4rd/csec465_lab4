@@ -47,7 +47,8 @@ foreach ($user in $users) {
     foreach ($k in $tmp) {
         $k = $k.split("/")[1] 
         if ([int]$k -In [int]$seven_days_before..[int]$cur_date) {
-            Write-Host "User is: $user last logon is: $tmp"
+            Write-Host "user is: $user and $($(net user $user | findstr /B /C:'Last logon').replace('?',''))"
+
         }
     }
 }
