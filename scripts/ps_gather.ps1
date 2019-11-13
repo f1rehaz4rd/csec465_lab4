@@ -1,3 +1,4 @@
+
 Write-Host "Part A: "
 Write-Host "Host name, OS Name, OS Version"
 systeminfo.exe | Select-Object -First 4 | Select-Object -Last 3 
@@ -7,7 +8,7 @@ Write-Host "Get hotfixes and sort them by date in descending order"
 Get-HotFix -ComputerName ([System.Net.Dns]::GetHostName()) | Sort-Object -Property InstalledOn -Descending | Format-Table -AutoSize 
 
 
-Get-Host "get ip information"
+Write-Host "get ip information"
 ipconfig.exe /all
 
 
@@ -19,9 +20,8 @@ Write-Host "Part B: "
 Write-Host "See installed components"
 Import-Module ServerManager -ErrorAction SilentlyContinue
 
-Get-WindowsOptionalFeature -ErrorAction SilentlyContinue
+Get-WindowsOptionalFeature | where installed
 Get-InstalledModule -ErrorAction SilentlyContinue
-
 #Get-Service | Sort-Object -Property status | Format-Table -AutoSize -Expand Both
 Write-Host "Get installed software"
 Get-WmiObject -Class Win32_Product
@@ -48,7 +48,6 @@ foreach ($user in $users) {
         $k = $k.split("/")[1] 
         if ([int]$k -In [int]$seven_days_before..[int]$cur_date) {
             Write-Host "user is: $user and $($(net user $user | findstr /B /C:'Last logon').replace('?',''))"
-
         }
     }
 }
@@ -59,4 +58,6 @@ Get-WmiObject win32_process | Select-Object ProcessName, ProcessID, ParentProces
 
 Write-Host "Suspicious Activity that is Established State"
 
-Get-NetTCPConnection | ForEach-Object { if ($_.RemotePort -ne 80 -and $_.RemotePort -ne 443 -and $_.State -eq "Established" -and $_.LocalPort -ne 443 -and $_.LocalPort -ne 80) { $_ } }
+Get-NetTCPConnection | ForEach-Object { if ($_.RemotePort -ne 80 -and $_.RemotePort -ne 443 -and $_.State -eq "Established" -and $_.LocalPort -ne 443 -and $_.LocalAddress -ne 80) { $_ } }
+
+
