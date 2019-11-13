@@ -1,10 +1,11 @@
-- hosts: windows
-vars:
+- name: Running Windows Tasks
+  hosts: windows
+  vars:
     Ansisble_port: 5986
     Ansible_user: 
     Ansisble_winrm_server_cert_validation: ignore
     Ansisble_winrm_transport: ntlm
-tasks:
+  tasks:
     - name: Name: PowerShell_Gatherer
       register: output 
       win_command: >
