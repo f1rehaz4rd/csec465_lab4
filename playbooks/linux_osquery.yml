@@ -19,10 +19,10 @@
     command: osqueryi "SELECT username FROM users" --line
     register: users_out
 
-  - debug: var=hostname_out.stdout
-  - debug: var=os_out.stdout
-  - debug: var=ip_out.stdout
-  - debug: var=users_out.stdout
+  - debug: var=hostname_out.stdout_lines
+  - debug: var=os_out.stdout_lines
+  - debug: var=ip_out.stdout_lines
+  - debug: var=users_out.stdout_lines
 
 ### Part B Tasks   ###
 
@@ -30,7 +30,7 @@
     command: osqueryi "select * from etc_services" --line
     register: installed_out
 
-  - debug: var=installed_out.stdout
+  - debug: var=installed_out.stdout_lines
 
 ### Part C Tasks   ###
   - name: c-i Recent Users
@@ -45,6 +45,6 @@
     command: osqueryi "SELECT pid,port,protocol,address FROM listening_ports where port!=0 and port>1500" --line
     register: sus_out
 
-  - debug: var=logged_in_out.stdout
-  - debug: var=processes_out.stdout
-  - debug: var=sus_out.stdout
+  - debug: var=logged_in_out.stdout_lines
+  - debug: var=processes_out.stdout_lines
+  - debug: var=sus_out.stdout_lines
