@@ -20,6 +20,8 @@ Write-Host "See installed components"
 Import-Module ServerManager -ErrorAction SilentlyContinue
 
 Get-WindowsOptionalFeature -ErrorAction SilentlyContinue
+Get-InstalledModule -ErrorAction SilentlyContinue
+
 #Get-Service | Sort-Object -Property status | Format-Table -AutoSize -Expand Both
 Write-Host "Get installed software"
 Get-WmiObject -Class Win32_Product
