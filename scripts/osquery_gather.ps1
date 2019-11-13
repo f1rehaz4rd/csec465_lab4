@@ -23,6 +23,8 @@ Write-Host "Part B: "
 
 osqueryi "SELECT name,version from programs" --line
 
+osqueryi "SELECT name,path from autoexec" --line
+
 Write-Host "Part C: "
 
 Write-Host "Recent user logins"
